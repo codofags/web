@@ -138,7 +138,14 @@
 
       var lb;
 
- 
+      function showFullscrenAd(){
+        sdk.adv.showFullscreenAdv({
+          callbacks: {
+            onClose: function(wasShown) {},
+            onError: function(error) {}
+          }
+        })
+      }
 
    
     </script>
