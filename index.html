@@ -57,11 +57,11 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/66.loader.js";
+      var loaderUrl = buildUrl + "/77.loader.js";
       var config = {
-        dataUrl: buildUrl + "/e8c15d0030afc6394da324fe3a9da571.data.gz",
-        frameworkUrl: buildUrl + "/dcfb1372fb11d8533666d1f911a31da2.js.gz",
-        codeUrl: buildUrl + "/67b61623324e9766e50ca8094ab7a3cb.wasm.gz",
+        dataUrl: buildUrl + "/2dc126aeac445976acfc969c62a1a1a3.data",
+        frameworkUrl: buildUrl + "/cb1a62a2505f749b38990e20a58f76fe.js",
+        codeUrl: buildUrl + "/e27b528b32c67ab608922fd644a1b1fa.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "My project (3)",
@@ -118,46 +118,6 @@
             };
 
       document.body.appendChild(script);
-
-    </script>
-	<script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
-
-    <script type="text/javascript">
-
-      vkBridge.send('VKWebAppInit');
-
-
-
-      function auth(){
-        vkBridge.send('VKWebAppGetUserInfo').then(_info =>{
-          console.log(_info);
-          unityI.SendMessage('VKSDK', 'AuthenticateSuccess', JSON.stringify(_info));
-        });
-      }
-
-      function getUserData(){
-        vkBridge.send("VKWebAppStorageGet",{"keys":["_save"]}).then(data =>{
-        console.log(data);
-        unityI.SendMessage('VKSDK', 'DataGetting', JSON.stringify(data));
-      });}
-
-      function setUserData(data){
-        console.log(data);
-        vkBridge.send('VKWebAppStorageSet',{"key": "_save" , "value": data}).then(_info =>{
-          console.log("Saved!")});
-      }
-
-      function showFullscrenAd(){
-        vkBridge.send('VKWebAppShowNativeAds',{ad_format:"interstitial"}).then(data => {
-          console.log(data);});
-      }
-
-      function showRewardedAd(){
-        vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"}).then(data => {
-          console.log(data);
-          unityI.SendMessage('VKSDK', 'RewardGetting',JSON.stringify(data.result));})
-      }
-
 
     </script>
   </body>
