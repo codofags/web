@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=960 height=700 tabindex="-1"></canvas>
+      <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -59,9 +59,9 @@
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/77.loader.js";
       var config = {
-        dataUrl: buildUrl + "/5db4f84a48036c772b7394c60f2cb453.data",
-        frameworkUrl: buildUrl + "/57ced877af014f0d16c8ec89f0d18d30.js",
-        codeUrl: buildUrl + "/a93505b845b38043713cadf5462d4056.wasm",
+        dataUrl: buildUrl + "/2dc126aeac445976acfc969c62a1a1a3.data",
+        frameworkUrl: buildUrl + "/cb1a62a2505f749b38990e20a58f76fe.js",
+        codeUrl: buildUrl + "/e27b528b32c67ab608922fd644a1b1fa.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "My project (3)",
@@ -97,7 +97,7 @@
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
         canvas.style.width = "960px";
-        canvas.style.height = "700px";
+        canvas.style.height = "600px";
       }
 
       loadingBar.style.display = "block";
@@ -120,5 +120,46 @@
       document.body.appendChild(script);
 
     </script>
+	 <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+
+    <script type="text/javascript">
+
+      vkBridge.send('VKWebAppInit');
+
+
+
+      function auth(){
+        vkBridge.send('VKWebAppGetUserInfo').then(_info =>{
+          console.log(_info);
+          unityI.SendMessage('VKSDK', 'AuthenticateSuccess', JSON.stringify(_info));
+        });
+      }
+
+      function getUserData(){
+        vkBridge.send("VKWebAppStorageGet",{"keys":["_save"]}).then(data =>{
+        console.log(data);
+        unityI.SendMessage('VKSDK', 'DataGetting', JSON.stringify(data));
+      });}
+
+      function setUserData(data){
+        console.log(data);
+        vkBridge.send('VKWebAppStorageSet',{"key": "_save" , "value": data}).then(_info =>{
+          console.log("Saved!")});
+      }
+
+      function showFullscrenAd(){
+        vkBridge.send('VKWebAppShowNativeAds',{ad_format:"interstitial"}).then(data => {
+          console.log(data);});
+      }
+
+      function showRewardedAd(){
+        vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"}).then(data => {
+          console.log(data);
+          unityI.SendMessage('VKSDK', 'RewardGetting',JSON.stringify(data.result));})
+      }
+
+
+    </script>
+    
   </body>
 </html>
