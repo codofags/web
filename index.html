@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | My project (3)</title>
+    <title>Unity WebGL Player | My project (13)</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=1110 height=640 tabindex="-1"></canvas>
+      <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -20,7 +20,7 @@
       <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
         <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">My project (3)</div>
+        <div id="unity-build-title">My project (13)</div>
       </div>
     </div>
     <script>
@@ -96,8 +96,8 @@
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
-        canvas.style.width = "1110px";
-        canvas.style.height = "640px";
+        canvas.style.width = "960px";
+        canvas.style.height = "600px";
       }
 
       loadingBar.style.display = "block";
@@ -118,47 +118,6 @@
             };
 
       document.body.appendChild(script);
-
-    </script>
-	
-    <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
-
-    <script type="text/javascript">
-
-      vkBridge.send('VKWebAppInit');
-
-
-
-      function auth(){
-        vkBridge.send('VKWebAppGetUserInfo').then(_info =>{
-          console.log(_info);
-          unityI.SendMessage('VKSDK', 'AuthenticateSuccess', JSON.stringify(_info));
-        });
-      }
-
-      function getUserData(){
-        vkBridge.send("VKWebAppStorageGet",{"keys":["_save"]}).then(data =>{
-        console.log(data);
-        unityI.SendMessage('VKSDK', 'DataGetting', JSON.stringify(data));
-      });}
-
-      function setUserData(data){
-        console.log(data);
-        vkBridge.send('VKWebAppStorageSet',{"key": "_save" , "value": data}).then(_info =>{
-          console.log("Saved!")});
-      }
-
-      function showFullscrenAd(){
-        vkBridge.send('VKWebAppShowNativeAds',{ad_format:"interstitial"}).then(data => {
-          console.log(data);});
-      }
-
-      function showRewardedAd(){
-        vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"}).then(data => {
-          console.log(data);
-          unityI.SendMessage('VKSDK', 'RewardGetting',JSON.stringify(data.result));})
-      }
-
 
     </script>
   </body>
